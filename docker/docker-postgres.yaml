@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:16-alpine
+    restart: always
+    volumes:
+      - ./init-database.sh:/docker-entrypoint-initdb.d/init-database.sh
+      - ./init-database.sql:/docker-entrypoint-initdb.d/init-database.sql
+    tmpfs:
+      - /var/lib/postgresql/data:rw
+    environment:
+      - POSTGRES_USER=backend
+      - POSTGRES_PASSWORD=backend
+      - POSTGRES_DB=backend
+    ports:
+      - 15432:5432
+    command:
+      - "postgres"
+      - "-c"
+      - "fsync=off" # to increase performance

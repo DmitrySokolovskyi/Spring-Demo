@@ -1,1 +1,2 @@
 rootProject.name = 'demo'
+include 'demo-domain', 'demo-repository', 'demo-service'
